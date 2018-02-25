@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 let
   pubkey = import ../services/pubkey.nix;
+  nvim = pkgs.neovim.override {
+    vimAlias = true;
+  };
+
 in
 {
   environment.systemPackages = with pkgs; [
@@ -14,7 +18,7 @@ in
     jwhois
     lsof
     mtr
-    neovim
+    nvim
     netcat-gnu
     rsync
     silver-searcher
