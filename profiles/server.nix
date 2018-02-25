@@ -1,4 +1,7 @@
 { config, pkgs, ... }:
+let
+  pubkey = import ../services/pubkey.nix;
+in
 {
   environment.systemPackages = with pkgs; [
     mc
@@ -67,7 +70,7 @@
     isNormalUser = true;
     uid = 1000;
     extraGroups = [ "wheel" ];
-    # openssh.authorizedKeys.keys = [ pubkey.rail ];
+    openssh.authorizedKeys.keys = [ pubkey.rail ];
     shell = pkgs.zsh;
   };
 
@@ -75,7 +78,7 @@
   programs.zsh.enableAutosuggestions = true;
   programs.zsh.ohMyZsh.enable = true;
   programs.zsh.ohMyZsh.plugins = [ "git" "systemd" "colorize" "colored-man-pages" ];
-  # programs.zsh.ohMyZsh.theme = "agnoster";
+  programs.zsh.ohMyZsh.theme = "agnoster";
   programs.zsh.syntaxHighlighting.enable = true;
   programs.zsh.shellAliases = {
     l = "ls -alh";
@@ -101,10 +104,33 @@
 
   services.nginx.enable = true;
   services.nginx.virtualHosts = {
+    "rail.merail.ca" = {
+      forceSSL = true;
+      enableACME = true;
+      root = "/home/www/rail.merail.ca/";
+    };
     "img.lgtm.ca" = {
       forceSSL = true;
       enableACME = true;
       root = "/home/www/img.lgtm.ca";
+      serverAliases = [ "img.merail.ca" ];
+      locations = {
+        "/" = {
+          extraConfig = ''
+            autoindex on; 
+          '';
+	};
+      };
+    };
+    "merail.ca" = {
+      forceSSL = true;
+      enableACME = true;
+      globalRedirect = "rail.merail.ca";
+    };
+    "lgtm.ca" = {
+      forceSSL = true;
+      enableACME = true;
+      globalRedirect = "rail.merail.ca";
     };
   };
 
