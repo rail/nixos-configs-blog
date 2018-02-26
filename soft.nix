@@ -2,7 +2,6 @@
 
 let
 
-  pubkeys = import ../pubkeys.nix;
   nvim = pkgs.neovim.override { vimAlias = true; };
 
 in
