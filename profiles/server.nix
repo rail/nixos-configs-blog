@@ -1,11 +1,12 @@
 { config, pkgs, ... }:
+
 let
+
   pubkey = import ../services/pubkey.nix;
-  nvim = pkgs.neovim.override {
-    vimAlias = true;
-  };
+  nvim = pkgs.neovim.override { vimAlias = true; };
 
 in
+
 {
   environment.systemPackages = with pkgs; [
     mc
@@ -77,6 +78,7 @@ in
     openssh.authorizedKeys.keys = [ pubkey.rail ];
     shell = pkgs.zsh;
   };
+  users.users.root.openssh.authorizedKeys.keys = [ pubkey.rail ];
 
   programs.zsh.enable = true;
   programs.zsh.enableAutosuggestions = true;
@@ -137,5 +139,13 @@ in
       globalRedirect = "rail.merail.ca";
     };
   };
+  services.openssh.listenAddresses = [
+    { addr = "0.0.0.0"; port = 2222; }
+  ];
 
+  networking.firewall = {
+    enable = true;
+    allowPing = true;
+    allowedTCPPorts = [ 2222 80 443 ];
+  };
 }
