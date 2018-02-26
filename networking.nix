@@ -2,6 +2,7 @@
   # This file was populated at runtime with the networking
   # details gathered from the active system.
   networking = {
+    hostName = "merail";
     nameservers = [
       "67.207.67.3"
       "67.207.67.2"
@@ -26,4 +27,15 @@
     ATTR{address}=="22:1c:1b:75:24:3d", NAME="eth0"
     
   '';
+
+  services.openssh.enable = true;
+  services.openssh.listenAddresses = [
+    { addr = "0.0.0.0"; port = 2222; }
+  ];
+
+  networking.firewall = {
+    enable = true;
+    allowPing = true;
+    allowedTCPPorts = [ 2222 80 443 ];
+  };
 }

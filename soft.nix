@@ -2,7 +2,7 @@
 
 let
 
-  pubkey = import ../services/pubkey.nix;
+  pubkeys = import ../pubkeys.nix;
   nvim = pkgs.neovim.override { vimAlias = true; };
 
 in
@@ -71,15 +71,6 @@ in
 
   '';
 
-  users.extraUsers.rail = {
-    isNormalUser = true;
-    uid = 1000;
-    extraGroups = [ "wheel" ];
-    openssh.authorizedKeys.keys = [ pubkey.rail ];
-    shell = pkgs.zsh;
-  };
-  users.users.root.openssh.authorizedKeys.keys = [ pubkey.rail ];
-
   programs.zsh.enable = true;
   programs.zsh.enableAutosuggestions = true;
   programs.zsh.ohMyZsh.enable = true;
@@ -106,46 +97,4 @@ in
     setopt NOCLOBBER
     setopt no_nomatch # when pattern matching fails, simply use the command as is
   '';
-
-
-  services.nginx.enable = true;
-  services.nginx.virtualHosts = {
-    "rail.merail.ca" = {
-      forceSSL = true;
-      enableACME = true;
-      root = "/home/www/rail.merail.ca/";
-    };
-    "img.lgtm.ca" = {
-      forceSSL = true;
-      enableACME = true;
-      root = "/home/www/img.lgtm.ca";
-      serverAliases = [ "img.merail.ca" ];
-      locations = {
-        "/" = {
-          extraConfig = ''
-            autoindex on; 
-          '';
-	};
-      };
-    };
-    "merail.ca" = {
-      forceSSL = true;
-      enableACME = true;
-      globalRedirect = "rail.merail.ca";
-    };
-    "lgtm.ca" = {
-      forceSSL = true;
-      enableACME = true;
-      globalRedirect = "rail.merail.ca";
-    };
-  };
-  services.openssh.listenAddresses = [
-    { addr = "0.0.0.0"; port = 2222; }
-  ];
-
-  networking.firewall = {
-    enable = true;
-    allowPing = true;
-    allowedTCPPorts = [ 2222 80 443 ];
-  };
 }

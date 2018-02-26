@@ -2,10 +2,8 @@
   imports = [
     ./hardware-configuration.nix
     ./networking.nix # generated at runtime by nixos-infect
-    ./profiles/server.nix
+    ./users.nix
+    ./soft.nix
+    ./web.nix
   ];
-
-  boot.cleanTmpDir = true;
-  networking.hostName = "merail";
-  services.openssh.enable = true;
 }
