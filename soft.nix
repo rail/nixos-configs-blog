@@ -14,20 +14,11 @@ in
     fzf
     gitAndTools.gitFull
     htop
-    jq
-    jwhois
     lsof
-    mtr
     nvim
-    netcat-gnu
     rsync
     silver-searcher
-    strace
-    tree
-    unzip
     wget
-    whois
-    zip
   ];
 
   programs.bash.enableCompletion = true;
