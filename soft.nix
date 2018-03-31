@@ -24,6 +24,7 @@ in
   programs.bash.enableCompletion = true;
   # copy the system configuration into nix-store
   system.copySystemConfiguration = true;
+  system.autoUpgrade.enable = true;
   security.sudo.wheelNeedsPassword = false;
   environment.variables = {
     EDITOR = "vim";
