@@ -66,7 +66,7 @@ in
   programs.zsh.enableAutosuggestions = true;
   programs.zsh.ohMyZsh.enable = true;
   programs.zsh.ohMyZsh.plugins = [ "git" "systemd" "colorize" "colored-man-pages" "ssh-agent" ];
-  programs.zsh.ohMyZsh.theme = "agnoster";
+  programs.zsh.ohMyZsh.theme = "frisk";
   programs.zsh.syntaxHighlighting.enable = true;
   programs.zsh.shellAliases = {
     l = "ls -alh";
