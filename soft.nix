@@ -2,13 +2,12 @@
 
 let
 
-  nvim = pkgs.neovim.override { vimAlias = true; };
+  nvim = pkgs.neovim.override { vimAlias = true; viAlias = true; };
 
 in
 
 {
   environment.systemPackages = with pkgs; [
-    mc
     curl
     file
     fzf
@@ -25,6 +24,7 @@ in
   # copy the system configuration into nix-store
   system.copySystemConfiguration = true;
   system.autoUpgrade.enable = true;
+  nix.gc.automatic = true;
   security.sudo.wheelNeedsPassword = false;
   environment.variables = {
     EDITOR = "vim";
@@ -72,8 +72,6 @@ in
     l = "ls -alh";
     ll = "ls -l";
     ls = "ls --color=tty";
-    vi = "nvim";
-    vim = "nvim";
   };
   programs.zsh.interactiveShellInit = ''
     setopt print_exit_value
