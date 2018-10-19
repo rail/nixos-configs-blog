@@ -63,7 +63,7 @@ in
   '';
 
   programs.zsh.enable = true;
-  programs.zsh.enableAutosuggestions = true;
+  programs.zsh.autosuggestions.enable = true;
   programs.zsh.ohMyZsh.enable = true;
   programs.zsh.ohMyZsh.plugins = [ "git" "systemd" "colorize" "colored-man-pages" "ssh-agent" ];
   programs.zsh.ohMyZsh.theme = "frisk";
