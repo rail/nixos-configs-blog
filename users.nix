@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 let
   pubkeys = import ./pubkeys.nix;
 in

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
 
@@ -10,7 +10,6 @@ in
   environment.systemPackages = with pkgs; [
     curl
     file
-    fzf
     gitAndTools.gitFull
     htop
     lsof
