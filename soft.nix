@@ -1,19 +1,20 @@
 { pkgs, ... }:
 
-let
-
-  nvim = pkgs.neovim.override { vimAlias = true; viAlias = true; };
-
-in
-
 {
+  nixpkgs.config.packageOverrides = pkgs: {
+    neovim = pkgs.neovim.override {
+      vimAlias = true;
+      viAlias = true;
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     curl
     file
     gitAndTools.gitFull
     htop
     lsof
-    nvim
+    neovim
     rsync
     silver-searcher
     wget
