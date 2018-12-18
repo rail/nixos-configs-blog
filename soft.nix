@@ -9,6 +9,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    borgbackup
     curl
     file
     gitAndTools.gitFull
@@ -18,6 +19,7 @@
     rsync
     silver-searcher
     wget
+    magic-wormhole
   ];
 
   programs.bash.enableCompletion = true;

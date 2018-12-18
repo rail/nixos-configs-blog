@@ -3,6 +3,7 @@
   # details gathered from the active system.
   networking = {
     hostName = "merail";
+    domain = "ca";
     nameservers = [
       "67.207.67.3"
       "67.207.67.2"

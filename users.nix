@@ -12,4 +12,9 @@ in
     openssh.authorizedKeys.keys = [ pubkeys.rail ];
     shell = pkgs.zsh;
   };
+  users.extraUsers.borg = {
+    isNormalUser = true;
+    uid = 1001;
+    openssh.authorizedKeys.keys = [ pubkeys.borg ];
+  };
 }
