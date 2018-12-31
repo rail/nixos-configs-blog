@@ -19,7 +19,6 @@
     rsync
     silver-searcher
     wget
-    magic-wormhole
   ];
 
   programs.bash.enableCompletion = true;
